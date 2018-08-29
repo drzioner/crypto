@@ -6,7 +6,7 @@ $(document).ready(function () {
     let limite = 15;
     let orden = "rank";
     
-    mostrarCryptos(limite, orden);
+    mostrarCryptos(limite, orden);    
 
     cargarCryptos(escala, inicio, limite, orden);
     
@@ -15,10 +15,10 @@ $(document).ready(function () {
 $(".caja-cryptos").on("click",".crypto-box", function () {
 
     let idcrypto = $(this).attr("idcrypto");
-
+    
     $(".caja-cryptos").addClass("caja-crypto");
     $(".caja-crypto").removeClass("caja-cryptos");
-       
+    
     mostrarUnaCrypto(idcrypto);
 
 });
@@ -39,30 +39,27 @@ $(".caja-cryptos").on("click",".crypto-box-2", function () {
 function mostrarCryptos(limite, orden) {
 
     axios.get('https://api.coinmarketcap.com/v2/ticker/?limit='+limite+'&sort='+orden)
-  .then(function (response) {
-    
-    let monedas = response.data.data;
+            .then(function (response) {
+                
+                let monedas = response.data.data;                
 
-    $.each(monedas, function(key, moneda ) {
+                $.each(monedas, function(key, moneda ) {
 
-        $(".caja-cryptos").append('<div class="crypto-box" idcrypto='+moneda.id+'>'
-                                    +'<div class="crypto-logo">'
-                                        +'<img src="https://s2.coinmarketcap.com/static/img/coins/32x32/'+moneda.id+'.png" alt="" srcset="">'
-                                    +'</div>'
-                                    +'<div class="crypto-content">'
-                                        +'<h4 class="crypto-name">'+moneda.name+'</h4>'
-                                        +'<h3 class="crypto-usd">$'+valor(Number(moneda.quotes.USD.price)) +'</h3>'
-                                    +'</div>'
-                                +'</div>');
-    });
+                    $(".caja-cryptos").append('<div class="crypto-box" idcrypto='+moneda.id+'>'
+                                                +'<div class="crypto-logo">'
+                                                    +'<img src="https://s2.coinmarketcap.com/static/img/coins/32x32/'+moneda.id+'.png" alt="" srcset="">'
+                                                +'</div>'
+                                                +'<div class="crypto-content">'
+                                                    +'<h4 class="crypto-name">'+moneda.name+'</h4>'
+                                                    +'<h3 class="crypto-usd">$'+valor(Number(moneda.quotes.USD.price)) +'</h3>'
+                                                +'</div>'
+                                            +'</div>');
+                });
 
-  })
-  .catch(function (error) {
-    console.log(error);
-  })
-  .then(function () {
-    console.log('ejecucion terminada');
-  });
+            })
+            .catch(function (error) {
+                console.log(error);
+            });
     
 }
 
@@ -89,9 +86,6 @@ function mostrarCryptosMas(inicio, limite, orden) {
   })
   .catch(function (error) {
     console.log(error);
-  })
-  .then(function () {
-    console.log('ejecucion terminada');
   });
     
 }
@@ -100,36 +94,50 @@ function mostrarUnaCrypto(idcrypto) {
 
     axios.get('https://api.coinmarketcap.com/v2/ticker/'+idcrypto+'/')
             .then(function (response) {
-    
-                console.log(response.data.data);
-                
-                
+
                 let crypto = response.data.data;
+
+                console.log("crypto",crypto);
+                
+
                 
                 $(".caja-crypto").html('<div class="crypto-box-2">'
-                                +'<div class="crypto-logo">'
-                                    +'<img src="https://s2.coinmarketcap.com/static/img/coins/32x32/'+crypto.id+'.png" alt="" srcset="">'
-                                +'</div>'
-                                +'<div class="crypto-content">'
-                                    +'<h4 class="crypto-name">'+crypto.name+'</h4>'
-                                    +'<div class="crypto-values">'
-                                        +'<h3 class="crypto-usd">Precio: $'+crypto.quotes.USD.price.toFixed(5) +'</h3>'
-                                        +'<h3 class="crypto-usd">1h '+Number(crypto.quotes.USD.percent_change_1h) +'%</h3>'
-                                        +'<h3 class="crypto-usd">24h '+Number(crypto.quotes.USD.percent_change_24h) +'%</h3>'
-                                    +'</div>'
-                                +'</div>'
-                            +'</div>');
+                                            +'<div class="crypto-portada">'
+                                                +'<img class="crypto-logo" src="https://s2.coinmarketcap.com/static/img/coins/32x32/'+crypto.id+'.png" alt="" srcset="">'
+                                                +'<h4 class="crypto-name">'+crypto.name+'</h4>'
+                                                +'<h4 class="crypto-symbol">'+crypto.symbol+'</h4>'
+                                            +'</div>'
+                                            +'<div class="crypto-content">'                                                
+                                                +'<div class="crypto-values">'
+                                                    +'<h3 class="crypto-usd">Precio: <h4>USD $'+ $.number( crypto.quotes.USD.price, 10 ) +'</h4></h3>'
+                                                    +'<h4>Variaciones del mercado</h4>'
+                                                    +'<table class="crypto-table">'                                                        
+                                                        +'<thead>'
+                                                            +'<tr>'
+                                                                +'<th>1h</th>'
+                                                                +'<th>24h</th>'
+                                                                +'<th>7d</th>'
+                                                            +'</tr>'
+                                                        +'</thead>'
+                                                        +'<tbody>'
+                                                            +'<tr>'
+                                                                +'<td>'+ cambiarColorValor(Number(crypto.quotes.USD.percent_change_1h)) +'</td>'
+                                                                +'<td>'+ cambiarColorValor(Number(crypto.quotes.USD.percent_change_24h)) +'</td>'
+                                                                +'<td>'+ cambiarColorValor(Number(crypto.quotes.USD.percent_change_7d)) +'</td>'
+                                                            +'</tr>'
+                                                        +'</tbody>'
+                                                    +'</table>'
+                                                    +'<h3 class="crypto-usd">Capitalización: <h4>USD $'+ $.number( crypto.quotes.USD.market_cap, 2 ) +'</h4></h3>'
+                                                +'</div>'
+                                            +'</div>'
+                                        +'</div>');                                       
 
             })
             .catch(function (error) {
                 console.log(error);
-            })
-            .then(function () {
-                console.log('ejecucion terminada');
             }); 
     
 }
-
 
 function valor(valor) {
         
@@ -139,30 +147,34 @@ function valor(valor) {
 
             if ( valor <= 0.999 && valor >= 0.1 ) {
     
-                return valor.toFixed(3);
+                return $.number( valor, 3 );
                 
             } else
             if ( valor <= 0.9999 && valor >= 0.01 ){
-                return valor.toFixed(4);
+                return $.number( valor, 4 );
             }else{
-                return valor.toFixed(2);
+                return $.number( valor, 2 );
             }
                                                 
         } else 
         if ( valor <= 0.09 && valor >= 0.01 ) {
     
-            return valor.toFixed(3);
+            return $.number( valor, 3 );
             
         } else
         if ( valor <= 0.009 && valor >= 0.001 ) {
     
-            return valor.toFixed(4);
+            return $.number( valor, 4 );
             
         } else
         if ( valor <= 0.0009 && valor >= 0.0001 ){
-            return valor.toFixed(5);
+
+            return $.number( valor, 5 );
+
         }else{
-            return valor.toFixed(6);
+
+            return $.number( valor, 6 );
+
         }
                                             
     } else
@@ -170,11 +182,11 @@ function valor(valor) {
 
         valor = valor/1000;
 
-        return valor.toFixed(2)+"K";
+        return $.number( valor, 2 )+"K";
 
     } else {
 
-        return valor.toFixed(2);
+        return $.number( valor, 3 );
 
     }
     
@@ -238,4 +250,22 @@ function cargarCryptos(escala, inicio, limite, orden) {
 
     return;
     
+}
+
+function cambiarColorValor(valor) {
+
+    let resultado;
+
+    if (valor > 0) {
+        
+        resultado = '<h3 class="green">'+valor+'%</h3>';
+
+    } else 
+    if (valor < 0) {
+        
+        resultado = '<h3 class="red">'+valor+'%</h3>';
+
+    }
+
+    return resultado;
 }

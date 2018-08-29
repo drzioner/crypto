@@ -1,6 +1,21 @@
 body{
+    background: #F3F4F8;
     user-select: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
 }
+
+.green{
+    color: green;
+    font-size: 1rem;
+}
+
+.red{
+    color: red;
+    font-size: 1rem;
+}
+
 #header{
     align-content: center;
     align-items: center;
@@ -19,21 +34,26 @@ body{
 }
 
 .caja-cryptos, .caja-crypto{
-    background: rgba(2,204,186,0.2);
+    background: #F3F4F8;
+    margin: 0;
     margin-top: 0.9rem;
+    padding: 0;
     padding-top: 5rem;
     transition: all 0.4s;
+    width: 100%;
 }
 
 .crypto-box{
-    background: linear-gradient(140deg,#02ccba,#02b3e4);
+    background: rgb(255, 255, 255);
     border: none;
     border-radius: 15px;
-    box-shadow: 0px 0px 0px #02ccba;
+    box-shadow: 0px 0px 10px #EAE9EE;
+    cursor: pointer;
     display: inline-flex;
     flex-flow: row nowrap;
     margin: 0.5rem 12%;
     padding: 0.5rem 0;
+    outline: none;
     width: 76%;
 }
 .crypto-box .crypto-logo{
@@ -57,14 +77,15 @@ body{
     padding-right: 9px;
 }
 .crypto-box .crypto-content .crypto-name{
-    color: white;
+    color: #2A3048;
     font-family: 'PT Sans Narrow', sans-serif;
     margin: 0;
     text-transform: capitalize;
 }
 .crypto-box .crypto-content .crypto-usd{
-    color: white;
+    color: #2A3048;
     font-family: 'Kurale', serif;
+    font-size: 1.2rem;
     margin: 0;
 }
 .crypto-box .crypto-content .crypto-values{
@@ -73,48 +94,99 @@ body{
 }
 
 .crypto-box-2{
-    background: linear-gradient(140deg,#02ccba,#02b3e4);
+    background: white;
     border: none;
     border-radius: 15px;
-    box-shadow: 0px 0px 0px #02ccba;
-    display: inline-flex;
-    flex-flow: row nowrap;
-    margin: 0.5rem 12%;
-    padding: 0.5rem 0;
+    box-shadow: 0px 0px 10px #EAE9EE;
+    cursor: pointer;
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 12%;
+    padding: 0;    
     width: 76%;
 }
-.crypto-box-2 .crypto-logo{
+.crypto-box-2 .crypto-portada{
     align-content: center;
-    align-items: center;
-    display: inline-flex;
-    flex: 20%;
-    justify-content: center;
-    padding-left: 6px;
+    align-items: baseline;
+    background: #02ccba;
+    border-radius: 15px 15px 0px 0px;
+    display: flex;
+    height: 20vh;
+    flex-flow: row nowrap;
+    justify-content: space-between;
 }
-.crypto-box-2 .crypto-logo img{
-    width: 32px;
+
+.crypto-box-2 .crypto-portada .crypto-logo{
+    align-content: center;
+    align-items: baseline;
+    display: inline-flex;
+    flex-flow: row nowrap;
+    justify-content: baseline;
+    left: 12px;
+    position: relative;
+    top: 15px;
+    width: 26px;
+}
+
+.crypto-box-2 .crypto-portada .crypto-name{
+    color: white;
+    font-family: 'PT Sans Narrow', sans-serif;
+    font-size: 2rem;
+    justify-content: center;
+    margin: 0;
+    position: relative;
+    text-align: center;
+    text-transform: capitalize;
+    top: 60px;
+}
+
+.crypto-box-2 .crypto-portada .crypto-symbol{
+    color: white;
+    font-family: 'PT Sans Narrow', sans-serif;
+    margin: 0;
+    position: relative;
+    right: 12px;
+    text-transform: capitalize;
+    top: 5px;
 }
 .crypto-box-2 .crypto-content{
     align-content: center;
     align-items: center;
-    display: inline-flex;
-    flex: 80%;
-    flex-flow: row nowrap;
+    background: white;
+    border-radius: 0px 0px 15px 15px;
+    display: flex;
+    flex-flow: column nowrap;
     justify-content: space-between;
-    padding-right: 9px;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
 }
-.crypto-box-2 .crypto-content .crypto-name{
-    color: white;
-    font-family: 'PT Sans Narrow', sans-serif;
-    margin: 0;
-    text-transform: capitalize;
-}
+
 .crypto-box-2 .crypto-content .crypto-usd{
-    color: white;
+    color: #2A3048;
     font-family: 'Kurale', serif;
     margin: 0;
 }
+
 .crypto-box-2 .crypto-content .crypto-values{
     display: flex;
     flex-flow: column;
+}
+
+.crypto-box-2 .crypto-content .crypto-values h4{
+    align-content: center;
+    align-items: center;
+    color: #2A3048;    
+    display: inline-flex;
+    font-family: 'Kurale', serif;
+    font-size: 1.2rem;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+.crypto-box-2 .crypto-content .crypto-values .crypto-table{
+    display: table;
+    flex-flow: column;
+    font-family: 'Kurale', serif;
+    justify-content: center;
+    text-align: center;
 }
