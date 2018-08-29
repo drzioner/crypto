@@ -1,9 +1,27 @@
 
 $(document).ready(function () {
 
-    let escala = 15;
+    let ancho = $("html").width();
+
+    let escala;
+
+    let limite;
+
+    if (ancho < 700) {
+
+        escala = 15;
+        limite = 15;
+        
+    } else {
+
+        escala = 30;
+        limite = 30;
+        
+    }
+
+    
     let inicio = 0;
-    let limite = 15;
+    
     let orden = "rank";
     
     mostrarCryptos(limite, orden);    
