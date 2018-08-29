@@ -26,6 +26,7 @@ body{
     position: fixed;
     top: 0;
     width: 100%;
+    z-index: 100;
 }
 #header h1{
     color: #02ccba;
@@ -39,6 +40,7 @@ body{
     margin-top: 0.9rem;
     padding: 0;
     padding-top: 5rem;
+    padding-bottom: 2rem;
     transition: all 0.4s;
     width: 100%;
 }

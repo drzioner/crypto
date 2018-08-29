@@ -58,7 +58,7 @@ function mostrarCryptos(limite, orden) {
 
             })
             .catch(function (error) {
-                console.log(error);
+                //console.log(error);
             });
     
 }
@@ -85,7 +85,7 @@ function mostrarCryptosMas(inicio, limite, orden) {
 
   })
   .catch(function (error) {
-    console.log(error);
+    //console.log(error);
   });
     
 }
@@ -97,10 +97,18 @@ function mostrarUnaCrypto(idcrypto) {
 
                 let crypto = response.data.data;
 
-                console.log("crypto",crypto);
-                
+                let pesos;
 
-                
+                $.get('https://openexchangerates.org/api/latest.json', {app_id: '6e84ba1ab3fc4036aa83618926b4c403'}, function(data) {
+                    
+                    pesos =data.rates.COP;
+
+                    pesos = crypto.quotes.USD.price * pesos;
+
+                    $(".pesos").html('COP $'+ $.number( pesos, 2 ) );
+
+                });                
+
                 $(".caja-crypto").html('<div class="crypto-box-2">'
                                             +'<div class="crypto-portada">'
                                                 +'<img class="crypto-logo" src="https://s2.coinmarketcap.com/static/img/coins/32x32/'+crypto.id+'.png" alt="" srcset="">'
@@ -109,7 +117,7 @@ function mostrarUnaCrypto(idcrypto) {
                                             +'</div>'
                                             +'<div class="crypto-content">'                                                
                                                 +'<div class="crypto-values">'
-                                                    +'<h3 class="crypto-usd">Precio: <h4>USD $'+ $.number( crypto.quotes.USD.price, 10 ) +'</h4></h3>'
+                                                    +'<h3 class="crypto-usd">Precio: <h4>USD $'+ $.number( crypto.quotes.USD.price, 10 ) +'</h4><h4 class="pesos"></h4></h3>'
                                                     +'<h4>Variaciones del mercado</h4>'
                                                     +'<table class="crypto-table">'                                                        
                                                         +'<thead>'
@@ -134,7 +142,7 @@ function mostrarUnaCrypto(idcrypto) {
 
             })
             .catch(function (error) {
-                console.log(error);
+                //console.log(error);
             }); 
     
 }
